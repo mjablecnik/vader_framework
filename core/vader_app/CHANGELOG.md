@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file.
 ### Breaking Change
 - Remove custom routes
 
+### Added
+- Add onStart callback to SplashView
+
 ### Fixed
 - Fix navigator resetting after hot-reload
   

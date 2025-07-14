@@ -32,6 +32,8 @@ class SplashView extends StatefulWidget {
   /// Background image of the splash view.
   final DecorationImage? backgroundImageDecoration;
 
+  final Future Function()? onStart;
+
   final Function onFinish;
 
   const SplashView({
@@ -46,6 +48,7 @@ class SplashView extends StatefulWidget {
     this.bottomLoading = false,
     this.duration = const Duration(seconds: 3),
     this.showStatusBar = false,
+    this.onStart,
     required this.onFinish,
   });
 
@@ -62,7 +65,11 @@ class _SplashViewState extends State<SplashView> {
       overlays: widget.showStatusBar ? [SystemUiOverlay.bottom, SystemUiOverlay.top] : [],
     );
 
-    Future.delayed(widget.duration!, () => widget.onFinish());
+    if (widget.onStart == null) {
+      Future.delayed(widget.duration!, () => widget.onFinish());
+    } else {
+      widget.onStart!.call().then((value) => widget.onFinish());
+    }
   }
 
   @override
