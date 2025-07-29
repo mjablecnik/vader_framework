@@ -12,6 +12,8 @@ dependencies:
   serinus: ^1.0.3
   vader_core: ^0.4.2
   hotreloader: ^4.1.0
+  mcp_server: ^1.0.2
+  shelf_plus: ^1.10.1
 
 dev_dependencies:
   lints: ^5.1.1

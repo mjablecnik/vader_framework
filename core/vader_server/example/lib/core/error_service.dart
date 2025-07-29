@@ -1,6 +1,6 @@
 import 'package:surrealdb/surrealdb.dart';
 
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 
 class ErrorService extends Provider {
   const ErrorService(this.surrealDB);

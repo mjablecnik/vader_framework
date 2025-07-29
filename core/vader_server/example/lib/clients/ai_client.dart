@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:vader_core/clients/logger.dart';
 import 'dart:convert';
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 import 'package:vader_server_example/config.dart';
 
 

@@ -1,4 +1,5 @@
 export 'package:serinus/serinus.dart' hide Logger, LogLevel, HttpMethod;
+export 'package:mcp_server/mcp_server.dart' hide Logger;
 export 'package:vader_core/vader_core.dart';
 
 import 'package:serinus/serinus.dart';
@@ -8,8 +9,8 @@ import 'package:uuid/uuid.dart';
 
 final Injector injector = Injector();
 
-class VaderServer {
-  const VaderServer({required this.modules, this.config = const VaderServerConfig()});
+class VaderSerinusServer {
+  const VaderSerinusServer({required this.modules, this.config = const VaderServerConfig()});
 
   final List<VaderModule> modules;
 
@@ -78,6 +79,7 @@ class VaderLoggerHook extends VaderHook {
 
 abstract class VaderModule {
   bool isReady = false;
+  bool enableMcp = false;
 
   //abstract final List<RouteBase> routes;
   abstract final List<Controller> controllers;

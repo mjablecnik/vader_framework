@@ -1,5 +1,4 @@
-import 'package:vader_core/vader_core.dart';
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_shelf_server.dart';
 import 'package:vader_server_example/clients/ai_client.dart';
 import 'package:vader_server_example/core/error_service.dart';
 import 'package:vader_server_example/clients/surrealdb_client.dart' hide Middleware;

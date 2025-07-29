@@ -1,4 +1,4 @@
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 
 class SerinusHook extends Hook with OnRequestResponse {
   @override

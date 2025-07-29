@@ -35,7 +35,7 @@ dart pub get
 Modules are the building blocks of your application. They contain controllers, middlewares, and services.
 
 ```dart
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 
 class AppModule extends VaderModule {
   Injector? _injector;
@@ -63,7 +63,7 @@ class AppModule extends VaderModule {
 Controllers handle HTTP requests and define routes.
 
 ```dart
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 import 'package:vader_server/api_response.dart';
 
 class TaskController extends Controller {
@@ -93,7 +93,7 @@ class TaskController extends Controller {
 In your main function, initialize and run the server with your modules.
 
 ```dart
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_serinus_server.dart';
 
 Future<void> main(List<String> arguments) async {
   await VaderServer(

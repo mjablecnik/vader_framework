@@ -1,22 +1,31 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:vader_server/api_response.dart';
-import 'package:vader_server/vader_server.dart';
+import 'package:vader_server/vader_shelf_server.dart';
 import 'package:vader_server_example/task/task_service.dart';
 
 import 'entities/task.dart';
 
 class TaskController extends Controller {
   TaskController({super.path = '/task'}) {
-    on(Route.post('/'), _createTask);
-    on(Route.get('/list'), _listTasks);
+    on(Route.post('/'), createTask);
+    on(Route.get('/list'), listTasks);
+    on(Route.get('/<taskId>'), deleteTask);
   }
 
-  Future<ApiResponse> _createTask(RequestContext context) async {
-    final task = Task.fromJson(jsonDecode(context.body.text!));
+  Future<ApiResponse> listTasks(Request context) async {
+    try {
+      final taskService = injector.use<TaskService>();
+      final allEvents = await taskService.listAllTasks();
+      return SuccessResponse.ok(data: allEvents);
+    } catch (e) {
+      return ErrorResponse.internalServerError(message: e.toString());
+    }
+  }
+
+  Future<ApiResponse> createTask(Request context) async {
+    final task = Task.fromJson(await context.body.asJson);
     final taskService = injector.use<TaskService>();
-    context.res.contentType = ContentType.json;
 
     try {
       final createdTask = await taskService.createTask(
@@ -28,19 +37,17 @@ class TaskController extends Controller {
 
       return SuccessResponse.ok(data: createdTask.toJson());
     } catch (e) {
-      //final errorService = injector.use<ErrorService>();
-      //await errorService.createError(url, e.toString());
-
       return ErrorResponse.internalServerError(message: e.toString());
     }
   }
 
-  Future<ApiResponse> _listTasks(RequestContext context) async {
+  Future<ApiResponse> deleteTask(Request context) async {
+    final taskService = injector.use<TaskService>();
+    final taskId = context.params['taskId'] as String;
+
     try {
-      final taskService = injector.use<TaskService>();
-      context.res.contentType = ContentType.json;
-      final allEvents = await taskService.listAllTasks();
-      return SuccessResponse.ok(data: allEvents);
+      await taskService.deleteTask(taskId);
+      return SuccessResponse.ok();
     } catch (e) {
       return ErrorResponse.internalServerError(message: e.toString());
     }

@@ -214,6 +214,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.0"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
+  http_methods:
+    dependency: transitive
+    description:
+      name: http_methods
+      sha256: "6bccce8f1ec7b5d701e7921dca35e202d425b57e317ba1a37f2638590e29e566"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -302,6 +318,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.16+1"
+  mcp_client:
+    dependency: "direct dev"
+    description:
+      name: mcp_client
+      sha256: c28a5c06f1056ebfbe5f571bd2a24138ad9f4556540fb0d4171f5aceb85acd61
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  mcp_server:
+    dependency: transitive
+    description:
+      name: mcp_server
+      sha256: "180ac209feb3f433c009944ca45252859471170bb82dfd881f8a33c563eed600"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   mek_data_class:
     dependency: transitive
     description:
@@ -326,6 +358,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  mime_type:
+    dependency: transitive
+    description:
+      name: mime_type
+      sha256: d652b613e84dac1af28030a9fba82c0999be05b98163f9e18a0849c6e63838bb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   mocktail:
     dependency: transitive
     description:
@@ -422,6 +462,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.2"
+  shelf_hotreload:
+    dependency: transitive
+    description:
+      name: shelf_hotreload
+      sha256: d7099618b18d3c63ba5272491c1812c306629495129ef9996115f0417902f963
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   shelf_packages_handler:
     dependency: transitive
     description:
@@ -430,6 +478,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  shelf_plus:
+    dependency: transitive
+    description:
+      name: shelf_plus
+      sha256: "5218d520c50c7184c57237837045b73036cdd096f75b18dd1b0aa7e2ad2b846c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.10.1"
+  shelf_router:
+    dependency: transitive
+    description:
+      name: shelf_router
+      sha256: f5e5d492440a7fb165fe1e2e1a623f31f734d3370900070b2b1e0d0428d59864
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.4"
   shelf_static:
     dependency: transitive
     description:
@@ -612,7 +676,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-dev.0"
+    version: "0.1.0"
   vm_service:
     dependency: transitive
     description:
