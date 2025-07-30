@@ -1,8 +1,6 @@
 import 'package:surrealdb/surrealdb.dart';
 
-import 'package:vader_server/vader_serinus_server.dart';
-
-class ErrorService extends Provider {
+class ErrorService {
   const ErrorService(this.surrealDB);
 
   final SurrealDB surrealDB;
@@ -18,7 +16,7 @@ class ErrorService extends Provider {
       {'url': url},
     ) as List).first['result'] as List<dynamic>;
 
-    return groups.length > 0;
+    return groups.isNotEmpty;
   }
 
   Future<bool> createError(String url, String message) async {

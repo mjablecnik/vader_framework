@@ -1,4 +1,4 @@
-import 'package:vader_server/vader_shelf_server.dart';
+import 'package:vader_server/vader_server.dart';
 import 'package:vader_server_example/core/app_module.dart';
 import 'package:vader_server_example/task/task_controller.dart';
 import 'package:vader_server_example/task/task_service.dart';
@@ -21,5 +21,5 @@ class TaskModule extends AppModule {
   List<Controller> get controllers => [TaskController()];
 
   @override
-  List<Middleware> get middlewares => [];
+  List<Middleware> get middlewares => [...super.middlewares];
 }

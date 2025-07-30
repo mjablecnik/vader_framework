@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:vader_core/clients/logger.dart';
 import 'dart:convert';
-import 'package:vader_server/vader_serinus_server.dart';
 import 'package:vader_server_example/config.dart';
 
-
-class AiClient extends Provider {
+class AiClient {
   DateTime lastRequest = DateTime.now().subtract(Duration(minutes: 1));
   final Dio dio = _getTogetherAiDio();
 

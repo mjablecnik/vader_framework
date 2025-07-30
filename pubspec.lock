@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "80.0.0"
-  acanthis:
-    dependency: transitive
-    description:
-      name: acanthis
-      sha256: "6f5563a9216d85ba942c67377099aad00a339097c2bd26116e37923f23b51d63"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.0"
   analyzer:
     dependency: transitive
     description:
@@ -57,14 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.0"
-  asn1lib:
-    dependency: transitive
-    description:
-      name: asn1lib
-      sha256: "9a8f69025044eb466b9b60ef3bc3ac99b4dc6c158ae9c56d25eeccf5bc56d024"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.5"
   async:
     dependency: transitive
     description:
@@ -241,22 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  email_validator:
-    dependency: transitive
-    description:
-      name: email_validator
-      sha256: b19aa5d92fdd76fbc65112060c94d45ba855105a28bb6e462de7ff03b12fa1fb
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  encrypt:
-    dependency: transitive
-    description:
-      name: encrypt
-      sha256: "62d9aa4670cc2a8798bab89b39fc71b6dfbacf615de6cf5001fb39f7e4a996a2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.3"
   ffi:
     dependency: transitive
     description:
@@ -371,6 +339,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  http_methods:
+    dependency: transitive
+    description:
+      name: http_methods
+      sha256: "6bccce8f1ec7b5d701e7921dca35e202d425b57e317ba1a37f2638590e29e566"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -467,6 +443,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  mcp_server:
+    dependency: transitive
+    description:
+      name: mcp_server
+      sha256: "180ac209feb3f433c009944ca45252859471170bb82dfd881f8a33c563eed600"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   mek_data_class:
     dependency: transitive
     description:
@@ -499,6 +483,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  mime_type:
+    dependency: transitive
+    description:
+      name: mime_type
+      sha256: d652b613e84dac1af28030a9fba82c0999be05b98163f9e18a0849c6e63838bb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   mocktail:
     dependency: transitive
     description:
@@ -619,14 +611,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
-  pointycastle:
-    dependency: transitive
-    description:
-      name: pointycastle
-      sha256: "4be0097fcf3fd3e8449e53730c631200ebc7b88016acecab2b0da2f0149222fe"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.9.1"
   pool:
     dependency: transitive
     description:
@@ -699,22 +683,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
-  secure_session:
-    dependency: transitive
-    description:
-      name: secure_session
-      sha256: "3d4de67dc0e9475cb8cb0b81b9f44ff92f9a11ce3343b21a11401f2df6f67dfa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
-  serinus:
-    dependency: transitive
-    description:
-      name: serinus
-      sha256: f3df91509c3106bf99fbda1f586683b7a4f6b12509083b82af2bfd8eec59208c
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
   share_plus:
     dependency: transitive
     description:
@@ -739,6 +707,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.2"
+  shelf_cors_headers:
+    dependency: transitive
+    description:
+      name: shelf_cors_headers
+      sha256: a127c80f99bbef3474293db67a7608e3a0f1f0fcdb171dad77fa9bd2cd123ae4
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.5"
+  shelf_hotreload:
+    dependency: transitive
+    description:
+      name: shelf_hotreload
+      sha256: d7099618b18d3c63ba5272491c1812c306629495129ef9996115f0417902f963
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   shelf_packages_handler:
     dependency: transitive
     description:
@@ -747,6 +731,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  shelf_plus:
+    dependency: transitive
+    description:
+      name: shelf_plus
+      sha256: "5218d520c50c7184c57237837045b73036cdd096f75b18dd1b0aa7e2ad2b846c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.10.1"
+  shelf_router:
+    dependency: transitive
+    description:
+      name: shelf_router
+      sha256: f5e5d492440a7fb165fe1e2e1a623f31f734d3370900070b2b1e0d0428d59864
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.4"
   shelf_static:
     dependency: transitive
     description:
@@ -759,10 +759,10 @@ packages:
     dependency: transitive
     description:
       name: shelf_web_socket
-      sha256: "3632775c8e90d6c9712f883e633716432a27758216dfb61bd86a8321c0580925"
+      sha256: cc36c297b52866d203dbf9332263c94becc2fe0ceaa9681d07b6ef9807023b67
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "2.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -792,14 +792,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.1"
-  spanner:
-    dependency: transitive
-    description:
-      name: spanner
-      sha256: "10aa269fc21a09033c255620bae2ee75d22870f7a1eb9b477fe0fc3444f1105d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   sprintf:
     dependency: transitive
     description:

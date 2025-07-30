@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:vader_server/api_response.dart';
-import 'package:vader_server/vader_shelf_server.dart';
+import 'package:vader_server/vader_server.dart';
 import 'package:vader_server_example/task/task_service.dart';
 
 import 'entities/task.dart';
@@ -10,7 +8,7 @@ class TaskController extends Controller {
   TaskController({super.path = '/task'}) {
     on(Route.post('/'), createTask);
     on(Route.get('/list'), listTasks);
-    on(Route.get('/<taskId>'), deleteTask);
+    on(Route.delete('/<taskId>'), deleteTask);
   }
 
   Future<ApiResponse> listTasks(Request context) async {

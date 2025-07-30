@@ -1,4 +1,4 @@
-import 'package:vader_server/vader_shelf_server.dart';
+import 'package:vader_server/vader_server.dart';
 import 'package:vader_server_example/clients/ai_client.dart';
 import 'package:vader_server_example/core/error_service.dart';
 import 'package:vader_server_example/clients/surrealdb_client.dart' hide Middleware;
@@ -26,5 +26,5 @@ class AppModule extends VaderModule {
   List<Controller> get controllers => [];
 
   @override
-  List<Middleware> get middlewares => [];
+  List<Middleware> get middlewares => [logRequests()];
 }
