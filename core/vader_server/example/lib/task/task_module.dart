@@ -23,3 +23,4 @@ class TaskModule extends AppModule {
   @override
   List<Middleware> get middlewares => [...super.middlewares];
 }
+

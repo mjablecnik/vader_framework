@@ -8,10 +8,14 @@ class TaskController extends Controller {
   TaskController({super.path = '/task'}) {
     on(Route.post('/'), createTask);
     on(Route.get('/list'), listTasks);
-    on(Route.delete('/<taskId>'), deleteTask);
+    on(Route.delete('/<id>'), deleteTask);
+
+    onMcp(TaskTools.listTasks, listTasks);
+    onMcp(TaskTools.createTask, createTask);
+    onMcp(TaskTools.deleteTask, deleteTask);
   }
 
-  Future<ApiResponse> listTasks(Request context) async {
+  Future<ApiResponse> listTasks(context) async {
     try {
       final taskService = injector.use<TaskService>();
       final allEvents = await taskService.listAllTasks();
@@ -21,8 +25,16 @@ class TaskController extends Controller {
     }
   }
 
-  Future<ApiResponse> createTask(Request context) async {
-    final task = Task.fromJson(await context.body.asJson);
+  Future<ApiResponse> createTask(HandlerContext context) async {
+    final Task task;
+    if (context.httpRequest != null) {
+      task = Task.fromJson(await context.httpRequest!.body.asJson);
+    } else if (context.mcpArgs != null) {
+      task = Task.fromJson(context.mcpArgs!);
+    } else {
+      return ErrorResponse.badRequest();
+    }
+
     final taskService = injector.use<TaskService>();
 
     try {
@@ -39,9 +51,17 @@ class TaskController extends Controller {
     }
   }
 
-  Future<ApiResponse> deleteTask(Request context) async {
+  Future<ApiResponse> deleteTask(HandlerContext context) async {
     final taskService = injector.use<TaskService>();
-    final taskId = context.params['taskId'] as String;
+
+    final String taskId;
+    if (context.httpRequest != null) {
+      taskId = context.httpRequest!.params['id'] as String;
+    } else if (context.mcpArgs != null) {
+      taskId = context.mcpArgs!['id'] as String;
+    } else {
+      return ErrorResponse.badRequest();
+    }
 
     try {
       await taskService.deleteTask(taskId);
@@ -50,4 +70,43 @@ class TaskController extends Controller {
       return ErrorResponse.internalServerError(message: e.toString());
     }
   }
+}
+
+class TaskTools {
+  static final listTasks = McpTool(
+    name: 'list_tasks',
+    description: 'List all tasks',
+    inputSchema: {'type': 'object', 'properties': {}},
+  );
+  static final createTask = McpTool(
+    name: 'create_task',
+    description: 'Create a new task or subtask',
+    inputSchema: {
+      'type': 'object',
+      'properties': {
+        'name': {'type': 'string', 'description': 'Name of the task'},
+        'description': {'type': 'string', 'description': 'Description of the task'},
+        'project_id': {'type': 'string', 'description': 'ID of the project this task belongs to'},
+        'parent_id': {'type': 'string', 'description': 'ID of the parent task (for subtasks)'},
+        'deadline': {
+          'type': 'string',
+          'description': 'Deadline for the task in ISO 8601 format (YYYY-MM-DD)',
+        },
+        'priority': {'type': 'integer', 'description': 'Priority of the task (1-4, where 4 is highest)'},
+      },
+      'required': ['name'],
+    },
+  );
+
+  static final deleteTask = McpTool(
+    name: 'delete_task',
+    description: 'Delete a task',
+    inputSchema: {
+      'type': 'object',
+      'properties': {
+        'id': {'type': 'string', 'description': 'ID of the task to delete'},
+      },
+      'required': ['id'],
+    },
+  );
 }
