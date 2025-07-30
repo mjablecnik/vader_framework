@@ -29,7 +29,7 @@ class VaderServer {
     return middlewares.reduce((combined, next) => combined + next);
   }
 
-  Future<Handler> router() async {
+  Future<Handler> _router() async {
     var app = Router().plus;
     if (config.enableCorsHeaders) app.use(corsHeaders());
     for (VaderModule module in modules) {
@@ -53,7 +53,7 @@ class VaderServer {
     return app.call;
   }
 
-  setupInjector() async {
+  _setupInjector() async {
     for (VaderModule module in modules) {
       final services = module.services;
       injector.addInjector(services ?? Injector());
@@ -63,17 +63,17 @@ class VaderServer {
   }
 
   run() async {
-    await setupInjector();
+    await _setupInjector();
     shelfRun(
-      router,
+      _router,
       defaultBindAddress: config.host,
       defaultBindPort: config.port,
       defaultEnableHotReload: config.isDebugMode,
     );
-    await runMcp();
+    await _runMcp();
   }
 
-  registerTools(mcp.Server server) {
+  _registerTools(mcp.Server server) {
     for (VaderModule module in modules) {
       for (Controller controller in module.controllers) {
         for (RouterHandler routerHandler in controller.mcpHandlers) {
@@ -97,8 +97,7 @@ class VaderServer {
     }
   }
 
-  runMcp() async {
-    //await setupInjector();
+  _runMcp() async {
     final serverResult = await mcp.McpServer.createAndStart(
       config: mcp.McpServer.simpleConfig(name: mcpConfig.name, version: mcpConfig.version),
       transportConfig:
@@ -107,7 +106,7 @@ class VaderServer {
     );
 
     serverResult.fold((server) async {
-      registerTools(server);
+      _registerTools(server);
     }, (error) => print('Server failed: $error'));
   }
 }
