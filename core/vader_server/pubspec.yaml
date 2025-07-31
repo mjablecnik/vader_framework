@@ -1,8 +1,8 @@
 name: vader_server
-description: Vader package for build cli programs.
+description: Vader package for build API and MCP servers and backend services.
 repository: https://github.com/mjablecnik/vader_framework/tree/master/core/vader_server
 resolution: workspace
-version: 0.1.0
+version: 0.2.0
 
 environment:
   sdk: '>=3.7.0 <4.0.0'

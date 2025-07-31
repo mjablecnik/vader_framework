@@ -60,10 +60,10 @@ class ErrorResponse extends ApiResponse {
   final Map<String, String>? errors;
 
   const ErrorResponse({
-    ResponseStatus status = ResponseStatus.internalServerError,
-    required String message,
+    super.status = ResponseStatus.internalServerError,
+    required super.message,
     this.errors,
-  }) : super(success: false, status: status, message: message);
+  }) : super(success: false);
 
   @override
   Map<String, dynamic> toJson() => {
