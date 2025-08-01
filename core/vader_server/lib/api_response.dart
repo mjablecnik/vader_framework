@@ -9,6 +9,7 @@ enum ResponseStatus {
   internalServerError(500);
 
   final int code;
+
   const ResponseStatus(this.code);
 }
 
@@ -17,11 +18,7 @@ sealed class ApiResponse {
   final ResponseStatus status;
   final String message;
 
-  const ApiResponse({
-    required this.success,
-    required this.status,
-    required this.message,
-  });
+  const ApiResponse({required this.success, required this.status, required this.message});
 
   Map<String, dynamic> toJson();
 }
@@ -29,11 +26,7 @@ sealed class ApiResponse {
 class SuccessResponse<T> extends ApiResponse {
   final T? data;
 
-  const SuccessResponse({
-    required ResponseStatus status,
-    required String message,
-    this.data,
-  }) : super(success: true, status: status, message: message);
+  const SuccessResponse({required super.status, required super.message, this.data}) : super(success: true);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -59,11 +52,8 @@ class SuccessResponse<T> extends ApiResponse {
 class ErrorResponse extends ApiResponse {
   final Map<String, String>? errors;
 
-  const ErrorResponse({
-    super.status = ResponseStatus.internalServerError,
-    required super.message,
-    this.errors,
-  }) : super(success: false);
+  const ErrorResponse({super.status = ResponseStatus.internalServerError, required super.message, this.errors})
+    : super(success: false);
 
   @override
   Map<String, dynamic> toJson() => {
