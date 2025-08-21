@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add onStart callback to SplashView
 - Add LocaleProvider
+- Add ThemeProvider
 - Add BackButtonHandler
 - Add prevent text scaling
 - Add unfocus on tap outside of text field
