@@ -8,15 +8,15 @@ import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 export 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 
-export 'app_settings_provider.dart';
 export 'back_button_handler.dart';
+export 'settings_provider.dart';
 export 'splash_view.dart';
 export 'vader_app_tester.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:vader_app/app_settings_provider.dart';
+import 'package:vader_app/settings_provider.dart';
 import 'package:vader_core/clients/logger.dart';
 import 'package:vader_design/design/themes.dart';
 import 'package:vader_core/clients/injector.dart';
@@ -80,39 +80,39 @@ class _VaderAppState extends State<VaderApp> {
   @override
   Widget build(BuildContext context) {
     final supportedLocales = widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')];
-    return LocaleProvider(
-      initialLocale: widget.localization?.initialLocale ?? supportedLocales.first,
-      child: ThemeProvider(
-        initialTheme: widget.theme.mode,
-        child: Builder(
-          builder: (context) {
-            return GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: MaterialApp.router(
-                debugShowCheckedModeBanner: widget.isDebug,
-                theme: widget.theme.light,
-                darkTheme: widget.theme.dark,
-                themeMode: ThemeProvider.of(context).currentTheme,
-                locale: widget.localization?.locale ?? LocaleProvider.of(context).locale,
-                supportedLocales: supportedLocales,
-                localizationsDelegates: widget.localization?.delegates,
-                routeInformationParser: router.routeInformationParser,
-                routeInformationProvider: router.routeInformationProvider,
-                routerDelegate: router.routerDelegate,
-                builder: (context, child) {
-                  if (widget.preventTextScaling) {
-                    return MediaQuery(
-                      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-                      child: child!,
-                    );
-                  } else {
-                    return child!;
-                  }
-                },
-              ),
-            );
-          },
-        ),
+    return SettingsProvider(
+      initialSettings: Settings(
+        themeMode: widget.theme.mode,
+        locale: widget.localization?.initialLocale ?? supportedLocales.first,
+      ),
+      child: Builder(
+        builder: (context) {
+          return GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: widget.isDebug,
+              theme: widget.theme.light,
+              darkTheme: widget.theme.dark,
+              themeMode: SettingsProvider.of(context).currentTheme,
+              locale: widget.localization?.locale ?? SettingsProvider.of(context).currentLocale,
+              supportedLocales: supportedLocales,
+              localizationsDelegates: widget.localization?.delegates,
+              routeInformationParser: router.routeInformationParser,
+              routeInformationProvider: router.routeInformationProvider,
+              routerDelegate: router.routerDelegate,
+              builder: (context, child) {
+                if (widget.preventTextScaling) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                    child: child!,
+                  );
+                } else {
+                  return child!;
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }
