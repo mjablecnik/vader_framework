@@ -34,7 +34,7 @@ class SplashView extends StatefulWidget {
 
   final Future Function()? onStart;
 
-  final Function onFinish;
+  final Function()? onFinish;
 
   const SplashView({
     super.key,
@@ -49,7 +49,7 @@ class SplashView extends StatefulWidget {
     this.duration = const Duration(seconds: 3),
     this.showStatusBar = false,
     this.onStart,
-    required this.onFinish,
+    this.onFinish,
   });
 
   @override
@@ -66,9 +66,9 @@ class _SplashViewState extends State<SplashView> {
     );
 
     if (widget.onStart == null) {
-      Future.delayed(widget.duration!, () => widget.onFinish());
+      Future.delayed(widget.duration!, () => widget.onFinish?.call());
     } else {
-      widget.onStart!.call().then((value) => widget.onFinish());
+      widget.onStart!.call().then((value) => widget.onFinish?.call());
     }
   }
 

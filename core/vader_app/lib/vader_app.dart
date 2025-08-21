@@ -59,7 +59,6 @@ class _VaderAppState extends State<VaderApp> {
   @override
   void initState() {
     super.initState();
-    Hive.initFlutter();
     Bloc.observer = TalkerBlocObserver(talker: logger.getTalker());
     setupModules();
     router = GoRouter(
@@ -79,43 +78,58 @@ class _VaderAppState extends State<VaderApp> {
     injector.commit();
   }
 
+  initSettingsStorage() async {
+    await Hive.initFlutter();
+    return Hive.openBox('vader_app_settings');
+  }
+
   @override
   Widget build(BuildContext context) {
     final supportedLocales = widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')];
-    return SettingsProvider(
-      initialSettings: Settings(
-        themeMode: widget.theme.mode,
-        locale: widget.localization?.initialLocale ?? supportedLocales.first,
-      ),
-      child: Builder(
-        builder: (context) {
-          return GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: widget.isDebug,
-              theme: widget.theme.light,
-              darkTheme: widget.theme.dark,
-              themeMode: SettingsProvider.of(context).currentTheme,
-              locale: widget.localization?.locale ?? SettingsProvider.of(context).currentLocale,
-              supportedLocales: supportedLocales,
-              localizationsDelegates: widget.localization?.delegates,
-              routeInformationParser: router.routeInformationParser,
-              routeInformationProvider: router.routeInformationProvider,
-              routerDelegate: router.routerDelegate,
-              builder: (context, child) {
-                if (widget.preventTextScaling) {
-                  return MediaQuery(
-                    data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-                    child: child!,
-                  );
-                } else {
-                  return child!;
-                }
+    return FutureBuilder(
+      future: initSettingsStorage(),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.hasData) {
+          return SettingsProvider(
+            storage: asyncSnapshot.data as Box,
+            initialSettings: Settings(
+              themeMode: widget.theme.mode,
+              locale: widget.localization?.initialLocale ?? supportedLocales.first,
+            ),
+            child: Builder(
+              builder: (context) {
+                return GestureDetector(
+                  onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                  child: MaterialApp.router(
+                    debugShowCheckedModeBanner: widget.isDebug,
+                    theme: widget.theme.light,
+                    darkTheme: widget.theme.dark,
+                    themeMode: SettingsProvider.of(context).currentTheme,
+                    locale: widget.localization?.locale ?? SettingsProvider.of(context).currentLocale,
+                    supportedLocales: supportedLocales,
+                    localizationsDelegates: widget.localization?.delegates,
+                    routeInformationParser: router.routeInformationParser,
+                    routeInformationProvider: router.routeInformationProvider,
+                    routerDelegate: router.routerDelegate,
+                    builder: (context, child) {
+                      if (widget.preventTextScaling) {
+                        return MediaQuery(
+                          data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                          child: child!,
+                        );
+                      } else {
+                        return child!;
+                      }
+                    },
+                  ),
+                );
               },
             ),
           );
-        },
-      ),
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
