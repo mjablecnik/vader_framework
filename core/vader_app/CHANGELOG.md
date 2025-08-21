@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Add LocaleProvider
 - Add BackButtonHandler
 - Add prevent text scaling
+- Add unfocus on tap outside of text field
 
 ### Fixed
 - Fix navigator resetting after hot-reload

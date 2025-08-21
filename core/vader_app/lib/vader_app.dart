@@ -81,26 +81,29 @@ class _VaderAppState extends State<VaderApp> {
       initialLocale: widget.localization?.initialLocale ?? supportedLocales.first,
       child: Builder(
         builder: (context) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: widget.isDebug,
-            theme: widget.theme.light,
-            darkTheme: widget.theme.dark,
-            locale: widget.localization?.locale ?? LocaleProvider.of(context).locale,
-            supportedLocales: supportedLocales,
-            localizationsDelegates: widget.localization?.delegates,
-            routeInformationParser: router.routeInformationParser,
-            routeInformationProvider: router.routeInformationProvider,
-            routerDelegate: router.routerDelegate,
-            builder: (context, child) {
-              if (widget.preventTextScaling) {
-                return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-                  child: child!,
-                );
-              } else {
-                return child!;
-              }
-            },
+          return GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: widget.isDebug,
+              theme: widget.theme.light,
+              darkTheme: widget.theme.dark,
+              locale: widget.localization?.locale ?? LocaleProvider.of(context).locale,
+              supportedLocales: supportedLocales,
+              localizationsDelegates: widget.localization?.delegates,
+              routeInformationParser: router.routeInformationParser,
+              routeInformationProvider: router.routeInformationProvider,
+              routerDelegate: router.routerDelegate,
+              builder: (context, child) {
+                if (widget.preventTextScaling) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                    child: child!,
+                  );
+                } else {
+                  return child!;
+                }
+              },
+            ),
           );
         },
       ),
