@@ -3,17 +3,20 @@ export 'package:vader_design/vader_design.dart';
 
 export 'package:go_router/go_router.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
+export 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 export 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 
-export 'vader_app_tester.dart';
+export 'app_settings_provider.dart';
+export 'back_button_handler.dart';
 export 'splash_view.dart';
+export 'vader_app_tester.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+import 'package:vader_app/app_settings_provider.dart';
 import 'package:vader_core/clients/logger.dart';
 import 'package:vader_design/design/themes.dart';
 import 'package:vader_core/clients/injector.dart';
@@ -112,82 +115,6 @@ class _VaderAppState extends State<VaderApp> {
         ),
       ),
     );
-  }
-}
-
-class BackButtonHandler extends StatefulWidget {
-  const BackButtonHandler({super.key, this.quitDialog, required this.child});
-
-  final Future<bool?> Function(BuildContext)? quitDialog;
-
-  final Widget child;
-
-  @override
-  State<BackButtonHandler> createState() => _BackButtonHandlerState();
-}
-
-class _BackButtonHandlerState extends State<BackButtonHandler> {
-  @override
-  void initState() {
-    super.initState();
-    BackButtonInterceptor.add(interceptor);
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(interceptor);
-    super.dispose();
-  }
-
-  Future<bool> interceptor(bool stopDefaultButtonEvent, RouteInfo info) async {
-    final navigator = Navigator.of(context);
-
-    if (navigator.canPop()) {
-      navigator.pop();
-      return true;
-    } else {
-      final exitApp = await widget.quitDialog?.call(context);
-      return exitApp != true;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return widget.child;
-  }
-}
-
-class ThemeProvider extends InheritedNotifier<ValueNotifier<ThemeMode>> {
-  ThemeProvider({super.key, required ThemeMode initialTheme, required super.child})
-      : super(notifier: ValueNotifier(initialTheme));
-
-  static ThemeProvider of(BuildContext context) {
-    final ThemeProvider? result = context.dependOnInheritedWidgetOfExactType<ThemeProvider>();
-    assert(result != null, 'No ThemeProvider found in context');
-    return result!;
-  }
-
-  ThemeMode get currentTheme => notifier!.value;
-
-  void setTheme(ThemeMode newTheme) {
-    notifier!.value = newTheme;
-  }
-}
-
-class LocaleProvider extends InheritedNotifier<ValueNotifier<Locale>> {
-  LocaleProvider({super.key, required Locale initialLocale, required super.child})
-    : super(notifier: ValueNotifier(initialLocale));
-
-  static LocaleProvider of(BuildContext context) {
-    final LocaleProvider? result = context.dependOnInheritedWidgetOfExactType<LocaleProvider>();
-    assert(result != null, 'No LocaleProvider found in context');
-    return result!;
-  }
-
-  Locale get locale => notifier!.value;
-
-  void setLocale(Locale newLocale) {
-    notifier!.value = newLocale;
   }
 }
 
