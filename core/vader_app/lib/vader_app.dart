@@ -29,6 +29,7 @@ class VaderApp extends StatefulWidget {
     required this.theme,
     this.localization,
     this.isDebug = false,
+    this.preventTextScaling = false,
     this.entrypoint,
   });
 
@@ -37,6 +38,8 @@ class VaderApp extends StatefulWidget {
   final VaderTheme theme;
 
   final bool isDebug;
+
+  final bool preventTextScaling;
 
   final String? entrypoint;
 
@@ -88,8 +91,18 @@ class _VaderAppState extends State<VaderApp> {
             routeInformationParser: router.routeInformationParser,
             routeInformationProvider: router.routeInformationProvider,
             routerDelegate: router.routerDelegate,
+            builder: (context, child) {
+              if (widget.preventTextScaling) {
+                return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: child!,
+                );
+              } else {
+                return child!;
+              }
+            },
           );
-        }
+        },
       ),
     );
   }
@@ -136,7 +149,6 @@ class _BackButtonHandlerState extends State<BackButtonHandler> {
     return widget.child;
   }
 }
-
 
 class LocaleProvider extends InheritedNotifier<ValueNotifier<Locale>> {
   LocaleProvider({super.key, required Locale initialLocale, required super.child})

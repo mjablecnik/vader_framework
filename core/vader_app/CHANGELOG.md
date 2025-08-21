@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Add onStart callback to SplashView
 - Add LocaleProvider
 - Add BackButtonHandler
+- Add prevent text scaling
 
 ### Fixed
 - Fix navigator resetting after hot-reload
