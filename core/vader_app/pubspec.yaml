@@ -27,6 +27,15 @@ dependencies:
   flutter_bloc: ^9.0.0
   talker_bloc_logger: ^4.6.14
 
+  # Simple Storage:
+  hive_ce: ^2.10.1
+  hive_ce_flutter: ^2.2.0
+
+  # App Info:
+  package_info_plus: ^8.3.1
+  mobile_device_identifier: ^0.0.3
+  android_device_id_generator: 0.1.1
+
   # Connection:
   #flutter_offline: 3.0.1
   #simple_connection_checker: ^0.3.4

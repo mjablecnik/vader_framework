@@ -4,6 +4,7 @@ export 'package:vader_design/vader_design.dart';
 export 'package:go_router/go_router.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 export 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
@@ -58,6 +59,7 @@ class _VaderAppState extends State<VaderApp> {
   @override
   void initState() {
     super.initState();
+    Hive.initFlutter();
     Bloc.observer = TalkerBlocObserver(talker: logger.getTalker());
     setupModules();
     router = GoRouter(

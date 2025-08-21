@@ -7,20 +7,19 @@ import 'package:mocktail/mocktail.dart';
 class MockAppInfo extends Mock implements AppInfo {}
 
 class AppInfo {
-  late final bool isLoaded;
   late final String deviceId;
   late final String appVersion;
   late final String appName;
 
-
   AppInfo() {
-    loadData().then((value) => isLoaded = value);
+    loadData();
   }
 
   Future<bool> loadData() async {
+    final packageInfo = (await PackageInfo.fromPlatform());
     deviceId = await _getDeviceId();
-    appVersion = (await PackageInfo.fromPlatform()).version;
-    appName = (await PackageInfo.fromPlatform()).appName;
+    appVersion = packageInfo.version;
+    appName = packageInfo.appName;
     return true;
   }
 
