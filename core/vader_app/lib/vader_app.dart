@@ -72,24 +72,50 @@ class _VaderAppState extends State<VaderApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: widget.isDebug,
-      theme: widget.theme.light,
-      darkTheme: widget.theme.dark,
-      locale: widget.localization?.locale,
-      supportedLocales: widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')],
-      localizationsDelegates: widget.localization?.delegates,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
-      routerDelegate: router.routerDelegate,
+    final supportedLocales = widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')];
+    return LocaleProvider(
+      initialLocale: widget.localization?.initialLocale ?? supportedLocales.first,
+      child: Builder(
+        builder: (context) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: widget.isDebug,
+            theme: widget.theme.light,
+            darkTheme: widget.theme.dark,
+            locale: widget.localization?.locale ?? LocaleProvider.of(context).locale,
+            supportedLocales: supportedLocales,
+            localizationsDelegates: widget.localization?.delegates,
+            routeInformationParser: router.routeInformationParser,
+            routeInformationProvider: router.routeInformationProvider,
+            routerDelegate: router.routerDelegate,
+          );
+        }
+      ),
     );
   }
 }
 
-class Localization {
-  const Localization({required this.locale, required this.supportedLocales, required this.delegates});
+class LocaleProvider extends InheritedNotifier<ValueNotifier<Locale>> {
+  LocaleProvider({super.key, required Locale initialLocale, required super.child})
+    : super(notifier: ValueNotifier(initialLocale));
 
-  final Locale locale;
+  static LocaleProvider of(BuildContext context) {
+    final LocaleProvider? result = context.dependOnInheritedWidgetOfExactType<LocaleProvider>();
+    assert(result != null, 'No LocaleProvider found in context');
+    return result!;
+  }
+
+  Locale get locale => notifier!.value;
+
+  void setLocale(Locale newLocale) {
+    notifier!.value = newLocale;
+  }
+}
+
+class Localization {
+  const Localization({this.initialLocale, this.locale, required this.supportedLocales, required this.delegates});
+
+  final Locale? locale;
+  final Locale? initialLocale;
   final Iterable<Locale> supportedLocales;
   final Iterable<LocalizationsDelegate<dynamic>> delegates;
 }
