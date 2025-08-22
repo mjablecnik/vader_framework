@@ -10,7 +10,6 @@ workspace:
   - cli/code_builder
   - cli/design_builder
   - core/vader_app
-  #- core/vader_app_info
   - core/vader_console
   - core/vader_core
   - core/vader_design
