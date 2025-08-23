@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:hashlib/hashlib.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:retry/retry.dart';
 import 'package:vader_core/clients/cache_client.dart';
@@ -46,11 +48,7 @@ class HttpClient {
       ),
     );
     if (enableLogs) {
-      _dio.interceptors.add(
-        Logger.dioInterceptor(
-          preventLargeResponses: preventLargeResponses,
-        ),
-      );
+      _dio.interceptors.add(Logger.dioInterceptor(preventLargeResponses: preventLargeResponses));
     }
     /*
     dio.interceptors.add(LogInterceptor(
@@ -113,7 +111,7 @@ class HttpClient {
     int? maxAttempts,
     Cache? enableCache,
   }) async {
-    Future<Map> makeRequest() {
+    Future makeRequest() {
       logger.debug('Make request: $path');
       return _createRequest(
         () => _dio.get(path, queryParameters: params, options: Options(headers: headers)),
@@ -122,12 +120,13 @@ class HttpClient {
       );
     }
 
-    final Map result;
+    final result;
     if (enableCache == null) {
       result = await makeRequest();
     } else {
+      final key = sha1.string(path + jsonEncode(params)).base64();
       final cache = Cache(storageClient: _cacheDb, duration: enableCache.duration);
-      result = await cache.get(key: path, process: makeRequest);
+      result = await cache.get(key: key, process: makeRequest);
     }
 
     return HttpResponse(result);
@@ -179,9 +178,7 @@ class HttpClient {
             logger.exception(error, stackTrace: error.stackTrace);
           }
         }
-        throw ServerException(
-          message: "DioException response status code: ${e.response?.statusCode}",
-        );
+        throw ServerException(message: "DioException response status code: ${e.response?.statusCode}");
       }
     }
   }

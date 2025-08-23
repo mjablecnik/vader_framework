@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:vader_core/clients/logger.dart';
@@ -15,10 +16,10 @@ class Cache {
   late final StorageClient _cacheDb;
   final Duration duration;
 
-  Future<Map> get({
+  Future<T> get<T>({
     required String key,
     Duration? duration,
-    required Future<Map> Function() process,
+    required Future<T> Function() process,
   }) async {
     final Map? data = await _cacheDb.getMap(key);
     final untilTime = DateTime.now().millisecondsSinceEpoch - (duration ?? this.duration).inMilliseconds;
@@ -27,7 +28,7 @@ class Cache {
       return data['data'];
     }
 
-    final Map response = await process.call();
+    final T response = await process.call();
 
     await _cacheDb.saveMap(key, {
       'time': DateTime.now().millisecondsSinceEpoch,
