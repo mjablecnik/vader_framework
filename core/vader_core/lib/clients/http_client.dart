@@ -8,7 +8,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:retry/retry.dart';
 import 'package:vader_core/clients/cache_client.dart';
 import 'package:vader_core/clients/logger.dart';
-import 'package:vader_core/clients/storage_client.dart';
 import 'package:vader_core/foundation/exceptions.dart';
 
 class HttpClientMock extends Mock implements HttpClient {}
@@ -23,7 +22,6 @@ class HttpResponse {
 
 class HttpClient {
   late final Dio _dio;
-  late final StorageClient _cacheDb;
 
   final String apiUrl;
   final bool enableLogs;
@@ -38,8 +36,6 @@ class HttpClient {
     this.maxAttempts = 3,
     this.kIsWeb = false,
   }) {
-    //logger.log('DeviceId: ${cached.deviceId}');
-    _cacheDb = StorageClient(name: 'httpCache', path: kIsWeb ? null : Directory.systemTemp.path);
     _dio = Dio(
       BaseOptions(
         baseUrl: apiUrl,
@@ -86,8 +82,6 @@ class HttpClient {
     }
   }
 
-  Future<int> cleanCache() => _cacheDb.removeAll();
-
   Future<HttpResponse> request({
     required String path,
     required HttpMethod method,
@@ -125,7 +119,7 @@ class HttpClient {
       result = await makeRequest();
     } else {
       final key = sha1.string(path + jsonEncode(params)).base64();
-      final cache = Cache(storageClient: _cacheDb, duration: enableCache.duration);
+      final cache = await Cache.init(duration: enableCache.duration);
       result = await cache.get(key: key, process: makeRequest);
     }
 

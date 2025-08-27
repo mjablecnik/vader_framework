@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fix navigator resetting after hot-reload
+- Fix initialization of vader modules
   
 
 ## [0.3.2] - 2025-03-17

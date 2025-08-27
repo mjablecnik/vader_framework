@@ -69,25 +69,32 @@ class _VaderAppState extends State<VaderApp> {
     );
   }
 
-  void setupModules() {
+  Future<void> setupModules() async {
     for (var module in widget.modules) {
       if (module.services != null) {
-        injector.addInjector(module.services!);
+        injector.addInjector(module.services ?? Injector());
       }
     }
-    injector.commit();
+
+    Future.delayed(const Duration(seconds: 1), () => injector.commit());
   }
 
-  initSettingsStorage() async {
+  Future<Box> initSettingsStorage() async {
     await Hive.initFlutter();
     return Hive.openBox('vader_app_settings');
+  }
+
+  Future<Box> vaderInit() async {
+    await setupModules();
+    final storage = await initSettingsStorage();
+    return storage;
   }
 
   @override
   Widget build(BuildContext context) {
     final supportedLocales = widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')];
     return FutureBuilder(
-      future: initSettingsStorage(),
+      future: vaderInit(),
       builder: (context, asyncSnapshot) {
         if (asyncSnapshot.hasData) {
           return SettingsProvider(

@@ -8,8 +8,9 @@ class Injector {
 
   final AutoInjector _injector = AutoInjector();
 
-  void addInjector(Injector injector) => _injector.addInjector(injector._injector);
+  bool isCommited = false;
 
+  void addInjector(Injector injector) => _injector.addInjector(injector._injector);
 
   T use<T>({String? key}) {
     return _injector.get<T>(key: key);
@@ -23,11 +24,23 @@ class Injector {
     _injector.addInstance(instance, key: key);
   }
 
+  waitFor<T>(Function() cmd) {
+    if (_injector.tryGet<T>() == null) {
+      Future.delayed(Duration(milliseconds: 100), () => waitFor<T>(cmd));
+    } else {
+      cmd.call();
+    }
+  }
+
   addLazyInstance<T>(Future<T> instance, {String? key}) {
     instance.then((e) {
-      _injector.uncommit();
-      _injector.addInstance(e, key: key);
-      _injector.commit();
+      if (isCommited) {
+        _injector.uncommit();
+        _injector.addInstance(e, key: key);
+        _injector.commit();
+      } else {
+        _injector.addInstance(e, key: key);
+      }
     });
   }
 
@@ -44,10 +57,16 @@ class Injector {
   }
 
   commit() {
-    _injector.commit();
+    if (!isCommited) {
+      _injector.commit();
+      isCommited = true;
+    }
   }
 
   uncommit() {
-    _injector.uncommit();
+    if (isCommited) {
+      _injector.uncommit();
+      isCommited = false;
+    }
   }
 }
