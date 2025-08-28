@@ -28,7 +28,9 @@ class Injector {
     if (_injector.tryGet<T>() == null) {
       Future.delayed(Duration(milliseconds: 100), () => waitFor<T>(cmd));
     } else {
+      _injector.uncommit();
       cmd.call();
+      _injector.commit();
     }
   }
 
