@@ -69,10 +69,10 @@ packages:
     dependency: transitive
     description:
       name: auto_injector
-      sha256: d2e204bc46d7349795364884d07ba79fe6a0f3a84a651b70dcbb68d82dcebab0
+      sha256: "1fc2624898e92485122eb2b1698dd42511d7ff6574f84a3a8606fc4549a1e8f8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.1"
   back_button_interceptor:
     dependency: transitive
     description:
@@ -274,10 +274,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_bloc
-      sha256: "153856bdaac302bbdc58a1d1403d50c40557254aa05eaeed40515d88a25a526b"
+      sha256: cf51747952201a455a1c840f8171d273be009b932c75093020f9af64f2123e38
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "9.1.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -351,18 +351,18 @@ packages:
     dependency: transitive
     description:
       name: hive_ce
-      sha256: ac66daee46ad46486a1ed12cf91e9d7479c875fb46889be8d2c96b557406647f
+      sha256: "708bb39050998707c5d422752159f91944d3c81ab42d80e1bd0ee37d8e130658"
       url: "https://pub.dev"
     source: hosted
-    version: "2.10.1"
+    version: "2.11.3"
   hive_ce_flutter:
     dependency: transitive
     description:
       name: hive_ce_flutter
-      sha256: "74c1d5f10d803446b4e7913bb272137e2724ba8a56465444f9e7713aeb60a877"
+      sha256: a0989670652eab097b47544f1e5a4456e861b1b01b050098ea0b80a5fabe9909
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.1"
   hotreloader:
     dependency: transitive
     description:
@@ -419,6 +419,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  isolate_channel:
+    dependency: transitive
+    description:
+      name: isolate_channel
+      sha256: f3d36f783b301e6b312c3450eeb2656b0e7d1db81331af2a151d9083a3f6b18d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2+1"
   js:
     dependency: transitive
     description:
@@ -439,10 +447,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: c35bb79562d980e9a453fc715854e1ed39e24e7d0297a880ef54e17f9874a9d7
+      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.1"
+    version: "6.0.0"
   logging:
     dependency: transitive
     description:
@@ -751,18 +759,18 @@ packages:
     dependency: transitive
     description:
       name: share_plus
-      sha256: fce43200aa03ea87b91ce4c3ac79f0cecd52e2a7a56c7a4185023c271fbfa6da
+      sha256: d7dc0630a923883c6328ca31b89aa682bacbf2f8304162d29f7c6aaff03a27a1
       url: "https://pub.dev"
     source: hosted
-    version: "10.1.4"
+    version: "11.1.0"
   share_plus_platform_interface:
     dependency: transitive
     description:
       name: share_plus_platform_interface
-      sha256: cc012a23fc2d479854e6c80150696c4a5f5bb62cb89af4de1c505cf78d0a5d0b
+      sha256: "88023e53a13429bd65d8e85e11a9b484f49d4c190abbd96c7932b74d6927cc9a"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "6.1.0"
   shelf:
     dependency: transitive
     description:
@@ -900,42 +908,42 @@ packages:
     dependency: transitive
     description:
       name: talker
-      sha256: "5ab7d974ad92042b3e2382441c41ec4c6e5b3fa2b4b024d8ccbfc4bc2244b7bb"
+      sha256: "2d742b54e5cda58b7d386cd2d95088c3429ef273b2a0869dec552fe02601367a"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.0.0"
   talker_bloc_logger:
     dependency: transitive
     description:
       name: talker_bloc_logger
-      sha256: "6d6a14be6ae2ae07ab0bf2d8868c7c2df859c88e6b74fbab2f11bd6013553f66"
+      sha256: "7752ca8a0b2eba487c8c189ca2390ebfcdaa4f7b10eda27587e5067e4427e7cd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.0.0"
   talker_dio_logger:
     dependency: transitive
     description:
       name: talker_dio_logger
-      sha256: "147e07590db44aef66e0699f862e21f93af98fc59d291dca2844b538bc24e319"
+      sha256: "20cc3bc9820fa73040f23e27d5d86462e590ddf02c43d0a801c56bf5ecc68922"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.12"
+    version: "5.0.0"
   talker_flutter:
     dependency: transitive
     description:
       name: talker_flutter
-      sha256: "0cc816260b226c0ff930909c9f22984316b652b140f5eabb97ae9813ee0de135"
+      sha256: d249fa16936a08fe5c4fb9e2b9b122fdcbaef6be9c4dcf61e448d0b76f3179f1
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.0.0"
   talker_logger:
     dependency: transitive
     description:
       name: talker_logger
-      sha256: "16ff0cfdf011f65b37957c9ff7ef7043dd9f1c8af3ccb4a44ac4a448defb9eb5"
+      sha256: "4f06d46db664c11cf4d629378da661f2c75aee629e3ef898dbc3cf44a0c41cd7"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.0.0"
   term_glyph:
     dependency: transitive
     description:

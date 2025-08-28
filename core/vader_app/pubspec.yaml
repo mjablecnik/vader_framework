@@ -19,17 +19,17 @@ dependencies:
     path: ../vader_design
 
   go_router: ^16.2.0
-  talker_flutter: ^4.6.14
+  talker_flutter: ^5.0.0
   back_button_interceptor: ^8.0.4
 
   # State Manager:
   bloc: ^9.0.0
-  flutter_bloc: ^9.0.0
-  talker_bloc_logger: ^4.6.14
+  flutter_bloc: ^9.1.1
+  talker_bloc_logger: ^5.0.0
 
   # Simple Storage:
-  hive_ce: ^2.10.1
-  hive_ce_flutter: ^2.2.0
+  hive_ce: ^2.11.3
+  hive_ce_flutter: ^2.3.1
 
   # App Info:
   package_info_plus: ^8.3.1
@@ -42,5 +42,5 @@ dependencies:
   #internet_connection_checker: 3.0.1
 
 dev_dependencies:
-  lints: ^5.1.1
+  lints: ^6.0.0
   test: ^1.25.15

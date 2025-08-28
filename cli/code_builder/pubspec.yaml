@@ -13,5 +13,5 @@ dependencies:
     path: ../../core/vader_console
 
 dev_dependencies:
-  lints: ^5.0.0
+  lints: ^6.0.0
   test: ^1.25.0
