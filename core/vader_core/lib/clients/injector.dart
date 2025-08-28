@@ -30,52 +30,52 @@ class Injector {
     return _injector.tryGet<T>(key: key);
   }
 
-  addInstance<T>(T instance, {String? key}) {
-    _injector.addInstance(instance, key: key);
+  void addInstance<T>(T instance, {String? key}) {
+    _injector.addInstance<T>(instance, key: key);
   }
 
-  waitFor<T>(Function() cmd) {
+  void waitFor<T>(Function() cmd, {Duration duration = const Duration(milliseconds: 100)}) {
     if (_injector.tryGet<T>() == null) {
-      Future.delayed(Duration(milliseconds: 100), () => waitFor<T>(cmd));
+      Future.delayed(duration, () => waitFor<T>(cmd));
     } else {
-      _injector.uncommit();
+      uncommit();
       cmd.call();
-      _injector.commit();
+      commit();
     }
   }
 
-  addLazyInstance<T>(Future<T> instance, {String? key}) {
+  void addLazyInstance<T>(Future<T> instance, {String? key}) {
     instance.then((e) {
       if (isCommitted) {
-        _injector.uncommit();
-        _injector.addInstance(e, key: key);
-        _injector.commit();
+        uncommit();
+        _injector.addInstance<T>(e, key: key);
+        commit();
       } else {
-        _injector.addInstance(e, key: key);
+        _injector.addInstance<T>(e, key: key);
       }
     });
   }
 
-  addSingleton<T>(Function constructor, {String? key}) {
-    _injector.addSingleton(constructor, key: key);
+  void addSingleton<T>(Function constructor, {String? key}) {
+    _injector.addSingleton<T>(constructor);
   }
 
-  add<T>(Function constructor, {String? key}) {
-    _injector.addSingleton(constructor, key: key);
+  void add<T>(Function constructor, {String? key}) {
+    _injector.addSingleton<T>(constructor, key: key);
   }
 
-  reset() {
+  void reset() {
     _injector.disposeRecursive();
   }
 
-  commit() {
+  void commit() {
     if (!isCommitted) {
       _injector.commit();
       isCommitted = true;
     }
   }
 
-  uncommit() {
+  void uncommit() {
     if (isCommitted) {
       _injector.uncommit();
       isCommitted = false;
