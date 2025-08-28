@@ -71,12 +71,12 @@ class _VaderAppState extends State<VaderApp> {
 
   Future<void> setupModules() async {
     for (var module in widget.modules) {
-      if (module.services != null) {
-        injector.addInjector(module.services ?? Injector());
+      final moduleServices = module.getServices();
+      if (moduleServices != null) {
+        injector.addInjector(moduleServices);
       }
     }
-
-    Future.delayed(const Duration(seconds: 1), () => injector.commit());
+    injector.commit();
   }
 
   Future<Box> initSettingsStorage() async {
@@ -84,17 +84,11 @@ class _VaderAppState extends State<VaderApp> {
     return Hive.openBox('vader_app_settings');
   }
 
-  Future<Box> vaderInit() async {
-    await setupModules();
-    final storage = await initSettingsStorage();
-    return storage;
-  }
-
   @override
   Widget build(BuildContext context) {
     final supportedLocales = widget.localization?.supportedLocales ?? const <Locale>[Locale('en', 'US')];
     return FutureBuilder(
-      future: vaderInit(),
+      future: initSettingsStorage(),
       builder: (context, asyncSnapshot) {
         if (asyncSnapshot.hasData) {
           return SettingsProvider(
@@ -153,4 +147,6 @@ class Localization {
 abstract class VaderModule {
   abstract final List<RouteBase> routes;
   abstract final Injector? services;
+
+  Injector? getServices() => services;
 }

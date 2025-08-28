@@ -13,8 +13,9 @@ class VaderAppTester {
 
   void setupModules() {
     for (var module in modules) {
-      if (module.services != null) {
-        injector.addInjector(module.services!);
+      final moduleServices = module.getServices();
+      if (moduleServices != null) {
+        injector.addInjector(moduleServices);
       }
     }
     injector.commit();
