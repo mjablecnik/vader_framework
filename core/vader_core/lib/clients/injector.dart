@@ -8,15 +8,25 @@ class Injector {
 
   final AutoInjector _injector = AutoInjector();
 
-  bool isCommited = false;
+  bool isCommitted = false;
 
   void addInjector(Injector injector) => _injector.addInjector(injector._injector);
 
+  @Deprecated('Use .get() method instead.')
   T use<T>({String? key}) {
     return _injector.get<T>(key: key);
   }
 
+  @Deprecated('Use .tryGet() method instead.')
   T? tryUse<T>({String? key}) {
+    return _injector.tryGet<T>(key: key);
+  }
+
+  T get<T>({String? key}) {
+    return _injector.get<T>(key: key);
+  }
+
+  T? tryGet<T>({String? key}) {
     return _injector.tryGet<T>(key: key);
   }
 
@@ -36,7 +46,7 @@ class Injector {
 
   addLazyInstance<T>(Future<T> instance, {String? key}) {
     instance.then((e) {
-      if (isCommited) {
+      if (isCommitted) {
         _injector.uncommit();
         _injector.addInstance(e, key: key);
         _injector.commit();
@@ -59,16 +69,16 @@ class Injector {
   }
 
   commit() {
-    if (!isCommited) {
+    if (!isCommitted) {
       _injector.commit();
-      isCommited = true;
+      isCommitted = true;
     }
   }
 
   uncommit() {
-    if (isCommited) {
+    if (isCommitted) {
       _injector.uncommit();
-      isCommited = false;
+      isCommitted = false;
     }
   }
 }

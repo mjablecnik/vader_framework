@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 
 ## [Unreleased]
+### Added
+- Add get and tryGet methods to injector.
+- Set use and tryUse methods to be deprecated.
+  
 ### Fixed
 - Fixed providing lazy instances.
   
