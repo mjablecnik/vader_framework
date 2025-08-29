@@ -1,0 +1,27 @@
+name: vader_feature
+description: Create feature part in Vader Framework
+version: 0.2.0
+
+environment:
+  mason: ^0.1.0
+
+# Variables specify dynamic values that your brick depends on.
+# Zero or more variables can be specified for a given brick.
+# Each variable has:
+#  * a type (string, number, boolean, enum, array, or list)
+#  * an optional short description
+#  * an optional default value
+#  * an optional list of default values (array only)
+#  * an optional prompt phrase used when asking for the variable
+#  * a list of values (enums only)
+#  * an optional separator (list only)
+vars:
+  name:
+    type: string
+    description: Feature name
+    prompt: What is your feature name?
+  package:
+    type: string
+    description: Project name
+    default: example
+    prompt: What is your project name?
