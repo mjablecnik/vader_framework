@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_version=1.0.0
+script_version=1.0.1
 
 cd $(dirname $(realpath "$0"))
 cd ..
@@ -33,7 +33,8 @@ compilation () {
 }
 
 installation () {
-  cp $project_root/bin/$app_name ~/.local/bin/
+  #cp $project_root/bin/$app_name ~/.local/bin/
+  cp $project_root/bin/$app_name ../../example_project/example_app/bin/
   cp $project_root/bin/$app_name ../../example_project/example_design/bin/
 }
 
@@ -41,7 +42,7 @@ installation () {
 if [ "$1" = "help" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ -z "$1" ]; then
   echo "Commands:"
   echo ""
-  echo "  build      Run program build"
+  #echo "  build      Run program build"
   echo "  compile    Run program compilation"
   echo "  install    Run program installation"
   echo ""
