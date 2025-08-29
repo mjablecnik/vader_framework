@@ -13,6 +13,7 @@ export 'commands.dart';
 export 'user_input.dart';
 export 'exceptions.dart';
 export 'args_parser.dart';
+export 'package:cli_menu/cli_menu.dart';
 
 Future<void> runCliApp<T extends Arguments>({
   required List<String> arguments,
