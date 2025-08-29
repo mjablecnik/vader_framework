@@ -2,7 +2,7 @@ name: code_builder
 description: Program for generating some parts of code during development.
 resolution: workspace
 publish_to: none
-version: 0.1.1
+version: 0.2.0
 
 environment:
   sdk: '>=3.7.0 <4.0.0'
