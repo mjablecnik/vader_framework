@@ -17,31 +17,58 @@ void main(List<String> args) {
         exit(1);
       }
 
-      final String componentName = args.name != null ? args.name! : UserInput.prompt(message: "Component name");
-      final String output = args.output != null
-          ? args.output!
-          : UserInput.prompt(message: "Output in root directory (${args.rootDirectoryPath})");
+      String type = args.type ?? selectType(args.rootDirectoryPath);
 
-      if (args.type == 'component') {
-        final brickPath = Brick.path(path.join(projectRoot, 'bricks', 'vader_component'));
-        final generator = await MasonGenerator.fromBrick(brickPath);
-        final target =
-            DirectoryGeneratorTarget(Directory(path.joinAll([args.rootDirectoryPath, ...path.split(output)])));
-        await generator.generate(target, vars: <String, dynamic>{'name': componentName, 'package': args.package});
+      final String output =
+          args.output ?? UserInput.prompt(message: "Output in root directory (${args.rootDirectoryPath})");
 
-        stdout.writeln("Component with name '$componentName' was successfully created.");
-      } else if (args.type == 'example') {
-        final brickPath = Brick.path(path.join(projectRoot, 'bricks', 'example'));
-        final generator = await MasonGenerator.fromBrick(brickPath);
-        final target = DirectoryGeneratorTarget(Directory(path.joinAll([args.rootDirectoryPath, ...path.split(output)])));
-        await generator.generate(target, vars: <String, dynamic>{'name': componentName});
+      await runGenerator(
+        rootDirectoryPath: args.rootDirectoryPath,
+        type: type,
+        output: output,
+        package: args.package,
+        name: args.name ?? UserInput.prompt(message: '${type.capitalize} name'),
+      );
 
-        stdout.writeln("Example was successfully created.");
-      } else {
-        stdout.writeln("Type '${args.type}' doesn't exist.");
-        exit(1);
-      }
       exit(0);
     },
   );
+}
+
+extension StringExt on String {
+  String get capitalize {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}
+
+String selectType(String rootDirectoryPath) {
+  final types =
+      Directory(path.joinAll([rootDirectoryPath, 'bricks']))
+          .listSync()
+          .map((e) => path.basename(e.path))
+          .where((element) => element.contains('vader_'))
+          .map((e) => e.replaceFirst('vader_', ''))
+          .toList();
+
+  print('Select type of code to generate:');
+  final menu = Menu(types);
+  final result = menu.choose();
+  return result.value;
+}
+
+Future<void> runGenerator({
+  required String rootDirectoryPath,
+  required String type,
+  required String output,
+  required String package,
+  required String name,
+}) async {
+  final brickPath = Brick.path(path.join(path.script.parent.path, 'bricks', 'vader_$type'));
+  final generator = await MasonGenerator.fromBrick(brickPath);
+
+  final target = DirectoryGeneratorTarget(Directory(path.joinAll([rootDirectoryPath, ...path.split(output)])));
+
+  await generator.generate(target, vars: <String, dynamic>{'name': name, 'package': package});
+
+  stdout.writeln("${type.capitalize} with name '$name' was successfully created.");
 }
