@@ -49,7 +49,7 @@ class CliArguments extends Arguments {
   });
 
   final String? type;
-  final String package;
+  final String? package;
   final String? name;
   final String? output;
   final String rootDirectoryPath;
@@ -61,7 +61,7 @@ class CliArguments extends Arguments {
       isVerbose: results.wasParsed(CoreCommands.verbose.name),
       showVersion: results.wasParsed(CoreCommands.version.name),
       type: Arguments.getOptionOrNull(results, option: "type"),
-      package: Arguments.getOptionOrThrow(results, option: "package"),
+      package: Arguments.getOptionOrNull(results, option: "package"),
       name: Arguments.getOptionOrNull(results, option: "name"),
       output: Arguments.getOptionOrNull(results, option: "output"),
       rootDirectoryPath: Arguments.getOptionOrNull(results, option: "directory") ?? Directory.current.path,

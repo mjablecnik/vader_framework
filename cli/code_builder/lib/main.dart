@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 import 'package:vader_console/vader_console.dart';
 import 'package:code_builder/arguments.dart';
+import 'package:yaml/yaml.dart';
 
 void main(List<String> args) {
   runCliApp(
@@ -11,11 +12,13 @@ void main(List<String> args) {
     parser: CliArguments.parse,
     app: (args) async {
       final String projectRoot = path.script.parent.path;
-      final pubspecExists = File(path.join(projectRoot, 'pubspec.yaml')).existsSync();
-      if (!pubspecExists) {
+      final pubspecFile = File(path.join(projectRoot, 'pubspec.yaml'));
+      if (!pubspecFile.existsSync()) {
         stdout.writeln('Script is not in your project.');
         exit(1);
       }
+
+      final packageName = args.package ?? loadYaml(pubspecFile.readAsStringSync())["name"];
 
       String type = args.type ?? selectType(args.rootDirectoryPath);
 
@@ -26,7 +29,7 @@ void main(List<String> args) {
         rootDirectoryPath: args.rootDirectoryPath,
         type: type,
         output: output,
-        package: args.package,
+        package: packageName,
         name: args.name ?? UserInput.prompt(message: '${type.capitalize} name'),
       );
 
