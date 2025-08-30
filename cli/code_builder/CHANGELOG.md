@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- ## [Unreleased] - 2025-02-26 -->
 
+## [0.2.1] - 2025-08-30
+### Fixed
+- Fix package name for app and design projects
+  
+
 ## [0.2.0] - 2025-08-30
 ### Added
 - Add automatic package name obtaining

@@ -44,6 +44,15 @@ extension StringExt on String {
   }
 }
 
+String transformPackageName(String packageName) {
+  final packageNameParts = packageName.split('_');
+  if (['design', 'app'].contains(packageNameParts.last)) {
+    packageNameParts.removeLast();
+    return packageNameParts.join('_');
+  }
+  return packageName;
+}
+
 String selectType(String rootDirectoryPath) {
   final types =
       Directory(path.joinAll([rootDirectoryPath, 'bricks']))
@@ -71,7 +80,7 @@ Future<void> runGenerator({
 
   final target = DirectoryGeneratorTarget(Directory(path.joinAll([rootDirectoryPath, ...path.split(output)])));
 
-  await generator.generate(target, vars: <String, dynamic>{'name': name, 'package': package});
+  await generator.generate(target, vars: <String, dynamic>{'name': name, 'package': transformPackageName(package)});
 
   stdout.writeln("${type.capitalize} with name '$name' was successfully created.");
 }
