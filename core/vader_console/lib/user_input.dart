@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:cli_menu/cli_menu.dart';
 
 class UserInput {
-  static String prompt({required String message}) {
+  static String prompt({required String message, String? defaultValue}) {
     stdout.write("\n$message: ");
     final String? result = stdin.readLineSync();
 
     if (result == null || result.isEmpty) {
-      return prompt(message: message);
+      return defaultValue ?? prompt(message: message);
     }
     return result;
   }

@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 
 <!-- ## [Unreleased] - 2025-02-26 -->
 
+## [Unreleased]
+- Add defaultValue into UserInput.prompt
+
 
 ## [1.0.0-dev.2]
 ### Added

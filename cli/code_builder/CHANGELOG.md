@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix package name for app and design projects
 - Fix brick templates path
+- Fix empty output path
   
 
 ## [0.2.0] - 2025-08-30

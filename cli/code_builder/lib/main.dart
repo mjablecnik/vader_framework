@@ -23,7 +23,7 @@ void main(List<String> args) {
       String type = args.type ?? selectType();
 
       final String output =
-          args.output ?? UserInput.prompt(message: "Output in root directory (${args.rootDirectoryPath})");
+          args.output ?? UserInput.prompt(message: "Output in root directory (${args.rootDirectoryPath})", defaultValue: ".");
 
       await runGenerator(
         rootDirectoryPath: args.rootDirectoryPath,
@@ -62,10 +62,7 @@ String selectType() {
           .map((e) => e.replaceFirst('vader_', ''))
           .toList();
 
-  print('Select type of code to generate:');
-  final menu = Menu(types);
-  final result = menu.choose();
-  return result.value;
+  return UserInput.menu(message: 'Select type of code to generate:', items: types);
 }
 
 Future<void> runGenerator({
