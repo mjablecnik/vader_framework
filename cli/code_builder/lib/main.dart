@@ -20,7 +20,7 @@ void main(List<String> args) {
 
       final packageName = args.package ?? loadYaml(pubspecFile.readAsStringSync())["name"];
 
-      String type = args.type ?? selectType(args.rootDirectoryPath);
+      String type = args.type ?? selectType();
 
       final String output =
           args.output ?? UserInput.prompt(message: "Output in root directory (${args.rootDirectoryPath})");
@@ -53,9 +53,9 @@ String transformPackageName(String packageName) {
   return packageName;
 }
 
-String selectType(String rootDirectoryPath) {
+String selectType() {
   final types =
-      Directory(path.joinAll([rootDirectoryPath, 'bricks']))
+      Directory(path.joinAll([path.script.parent.path, 'bricks']))
           .listSync()
           .map((e) => path.basename(e.path))
           .where((element) => element.contains('vader_'))
