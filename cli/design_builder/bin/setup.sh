@@ -33,7 +33,7 @@ compilation () {
 }
 
 installation () {
-  cp $project_root/bin/$app_name ~/.local/bin/
+  #cp $project_root/bin/$app_name ~/.local/bin/
   cp $project_root/bin/$app_name ../../example_project/example_design/bin/
 }
 
@@ -41,7 +41,7 @@ installation () {
 if [ "$1" = "help" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ -z "$1" ]; then
   echo "Commands:"
   echo ""
-  echo "  build      Run program build"
+  #echo "  build      Run program build"
   echo "  compile    Run program compilation"
   echo "  install    Run program installation"
   echo ""
@@ -59,10 +59,10 @@ if [ "$1" = "compile" ] || [ "$2" = "compile" ] || [ "$1" = "--compile" ] || [ "
   echo "Success compile"
 fi
 
-if [ "$1" = "build" ]  || [ "$2" = "build" ] || [ "$1" = "--build" ]  || [ "$2" = "--build" ]; then
-  compilation
-  echo "Success build"
-fi
+#if [ "$1" = "build" ]  || [ "$2" = "build" ] || [ "$1" = "--build" ]  || [ "$2" = "--build" ]; then
+#  compilation
+#  echo "Success build"
+#fi
 
 if [ "$1" = "install" ] || [ "$2" = "install" ] || [ "$1" = "--install" ] || [ "$2" = "--install" ]; then
   installation
