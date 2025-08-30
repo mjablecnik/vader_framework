@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 <!-- ## [Unreleased] - 2025-02-26 -->
 
+## [1.0.0-dev.4] - 2025-08-30
+### Added
+- Add automatic package name obtaining
+
 
 ## [1.0.0-dev.3] - 2025-03-21
 ### Fixed
