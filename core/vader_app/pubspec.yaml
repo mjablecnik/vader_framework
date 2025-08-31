@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #vader_core: ^0.4.0
-  #vader_design: ^0.2.0
+  #vader_core: any
+  #vader_design: any
   vader_core:
     path: ../vader_core
   vader_design:
