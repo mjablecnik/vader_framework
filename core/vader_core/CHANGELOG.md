@@ -3,8 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 
-
-## [Unreleased]
+## [0.5.0] - 2025-08-31
 ### Added
 - Add get and tryGet methods to injector.
 - Set use and tryUse methods to be deprecated.
