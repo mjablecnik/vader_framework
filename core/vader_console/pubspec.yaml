@@ -2,7 +2,7 @@ name: vader_console
 description: Vader package for build cli programs.
 repository: https://github.com/mjablecnik/vader_framework/tree/master/core/vader_console
 resolution: workspace
-version: 1.0.0-dev.2
+version: 1.0.0
 
 environment:
   sdk: '>=3.7.0 <4.0.0'
