@@ -1,4 +1,5 @@
-import 'package:android_device_id_generator/android_device_id_generator.dart';
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:mobile_device_identifier/mobile_device_identifier.dart';
@@ -30,7 +31,7 @@ class AppInfo {
     return true;
   }
 
-  _getDeviceId() async {
+  Future<String> _getDeviceId() async {
     final storage = await Hive.openBox('vader_app_settings');
     String? deviceId = await storage.get('deviceId');
 
@@ -46,6 +47,13 @@ class AppInfo {
     }
 
     return deviceId;
+  }
+
+  String generateAndroidDeviceId({bool secure = false}) {
+    final random = secure ? Random.secure() : Random();
+    String generateHalf() =>
+        random.nextInt(1 << 31).toRadixString(16).padLeft(8, '0');
+    return generateHalf() + generateHalf();
   }
 
   @override
