@@ -148,7 +148,7 @@ class HttpClient {
       );
 
       //final response = await request.call();
-      if (response.statusCode == 200 && response.data != null) {
+      if ([200, 201].contains(response.statusCode) && response.data != null) {
         try {
           return await onSuccess(response.data);
         } on Error catch (error) {
