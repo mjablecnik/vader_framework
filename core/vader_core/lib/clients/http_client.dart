@@ -92,7 +92,7 @@ class HttpClient {
   }) {
     final options = Options(headers: headers, method: method.name.toUpperCase());
     return _createRequest(
-      () => _dio.request(path, data: data, queryParameters: params, options: options),
+          () => _dio.request(path, data: data, queryParameters: params, options: options),
       onSuccess: (data) async => HttpResponse(data),
       maxAttempts: maxAttempts,
     );
@@ -108,7 +108,7 @@ class HttpClient {
     Future makeRequest() {
       logger.debug('Make request: $path');
       return _createRequest(
-        () => _dio.get(path, queryParameters: params, options: Options(headers: headers)),
+            () => _dio.get(path, queryParameters: params, options: Options(headers: headers)),
         onSuccess: (data) => Future.value(data),
         maxAttempts: maxAttempts,
       );
@@ -135,20 +135,19 @@ class HttpClient {
     }
   }
 
-  Future<T> _createRequest<T>(
-    Future<Response> Function() request, {
+  Future<T> _createRequest<T>(Future<Response> Function() request, {
     required Future<T> Function(dynamic data) onSuccess,
     Future<ServerException?> Function(int? status, dynamic data)? onServerError,
     int? maxAttempts,
   }) async {
     try {
       final response = await RetryOptions(maxAttempts: maxAttempts ?? this.maxAttempts).retry(
-        () => request.call(),
+            () => request.call(),
         retryIf: (e) async => await _isConnectedToInternet() && (e is SocketException || e is TimeoutException),
       );
 
       //final response = await request.call();
-      if ([200, 201].contains(response.statusCode) && response.data != null) {
+      if (response.statusCode! >= 200 && response.statusCode! < 300 && response.data != null) {
         try {
           return await onSuccess(response.data);
         } on Error catch (error) {
