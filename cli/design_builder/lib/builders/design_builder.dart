@@ -109,6 +109,7 @@ class DesignBuilder {
         case 'theme':
           componentBuilder.buildTheme(path, name);
           themeBuilder.addTheme(path, name);
+          _exportBuilder.add(filePath);
       }
     }
     themeBuilder.buildThemeModes(inputPath: inputThemePath, outputPath: outputThemePath);
