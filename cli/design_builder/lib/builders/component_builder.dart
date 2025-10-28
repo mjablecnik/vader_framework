@@ -22,17 +22,13 @@ class ComponentBuilder {
     final file = File('$path/${name.snakeCase}.dart');
     String code = file
         .readAsStringSync()
-        .replaceAll(
-          " = style!",
-          " = (style ?? context.designTheme.$designPathStyle${name.camelCase}Style)",
-        )
+        .replaceAll(" = style!", " = (style ?? context.designTheme.$designPathStyle${name.camelCase}Style)")
         .replaceAll(
           " = widget.style!",
           " = (widget.style ?? context.designTheme.$designPathStyle${name.camelCase}Style)",
         );
 
     code =
-        "import 'package:$packageName/design/design.theme.dart';\n"
         "import 'package:$packageName/$packageName.dart';\n"
         "${Utils.removeSrcExportsFromString(code, packageName: packageName)}";
 
@@ -45,7 +41,7 @@ class ComponentBuilder {
     ReCase name = ReCase(fileName);
     final file = File('$path/${name.snakeCase}.style.dart');
 
-    var code = file.readAsStringSync().replaceAll(
+    String code = file.readAsStringSync().replaceAll(
       "@tailorMixinComponent",
       "\npart '${name.snakeCase}.style.tailor.dart';\n\n@tailorMixinComponent",
     );
@@ -63,6 +59,25 @@ class ComponentBuilder {
 
     final fullPath =
         '$outputPath$path/${name.snakeCase == 'design' ? '' : name.snakeCase}/${name.snakeCase}.style.dart';
+    final outputFile = File(fullPath);
+    outputFile.writeAsStringSync(code);
+  }
+
+  void buildTheme(String path, String fileName) {
+    ReCase name = ReCase(fileName);
+    final file = File('$path/${name.snakeCase}.theme.dart');
+
+    String code =
+        "import 'package:$packageName/$packageName.dart';\n"
+        "${Utils.removeSrcExportsFromString(file.readAsStringSync(), packageName: packageName)}";
+
+    path = Directory(path.replaceFirst(inputPath, '')).parent.path;
+
+    if (path == 'src/' || path == 'src/design') path = '';
+    if (name.snakeCase == 'design') fileName = '';
+
+    final fullPath =
+        '$outputPath$path/${name.snakeCase == 'design' ? '' : name.snakeCase}/${name.snakeCase}.theme.dart';
     final outputFile = File(fullPath);
     outputFile.writeAsStringSync(code);
   }

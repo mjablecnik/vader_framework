@@ -107,6 +107,7 @@ class DesignBuilder {
           storybookBuilder.buildStory(path, name);
           break;
         case 'theme':
+          componentBuilder.buildTheme(path, name);
           themeBuilder.addTheme(path, name);
       }
     }
