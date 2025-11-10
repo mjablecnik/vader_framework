@@ -134,6 +134,15 @@ class HttpClient {
     return HttpResponse(data: result);
   }
 
+  Future<bool> hasInternetConnection({String testAddress = 'https://www.google.com/'}) async {
+    try {
+      final result = await request(path: testAddress, method: HttpMethod.get, maxAttempts: 1);
+      return result.type == HttpResponseType.success;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> _isConnectedToInternet([testAddress = 'google.com']) async {
     try {
       final result = await InternetAddress.lookup(testAddress);
