@@ -31,6 +31,7 @@ class HttpClient {
   final String apiUrl;
   final bool enableLogs;
   final bool preventLargeResponses;
+  final Duration? connectTimeout;
   final int maxAttempts;
   final bool kIsWeb;
 
@@ -38,13 +39,14 @@ class HttpClient {
     required this.apiUrl,
     required this.enableLogs,
     required this.preventLargeResponses,
+    this.connectTimeout = const Duration(seconds: 5),
     this.maxAttempts = 3,
     this.kIsWeb = false,
   }) {
     _dio = Dio(
       BaseOptions(
         baseUrl: apiUrl,
-        connectTimeout: const Duration(seconds: 10),
+        connectTimeout: connectTimeout,
         headers: {'Content-Type': 'application/json'},
       ),
     );
