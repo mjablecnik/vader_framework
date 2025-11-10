@@ -44,11 +44,7 @@ class HttpClient {
     this.kIsWeb = false,
   }) {
     _dio = Dio(
-      BaseOptions(
-        baseUrl: apiUrl,
-        connectTimeout: connectTimeout,
-        headers: {'Content-Type': 'application/json'},
-      ),
+      BaseOptions(baseUrl: apiUrl, connectTimeout: connectTimeout, headers: {'Content-Type': 'application/json'}),
     );
     if (enableLogs) {
       _dio.interceptors.add(Logger.dioInterceptor(preventLargeResponses: preventLargeResponses));
@@ -96,8 +92,14 @@ class HttpClient {
     Map<String, dynamic>? params,
     Map<String, dynamic>? headers,
     int? maxAttempts,
+    Duration? timeout,
   }) {
-    final options = Options(headers: headers, method: method.name.toUpperCase());
+    final options = Options(
+      headers: headers,
+      method: method.name.toUpperCase(),
+      receiveTimeout: timeout,
+      sendTimeout: timeout,
+    );
     return _createRequest(
       () => _dio.request(path, data: data, queryParameters: params, options: options),
       onSuccess: (data) async => HttpResponse(data: data),
@@ -134,10 +136,15 @@ class HttpClient {
     return HttpResponse(data: result);
   }
 
-  Future<bool> hasInternetConnection({String testAddress = 'https://www.google.com/'}) async {
+  Future<bool> hasInternetConnection({
+    String testAddress = 'https://www.google.com/',
+    Duration timeout = const Duration(seconds: 2),
+  }) async {
     try {
-      final result = await request(path: testAddress, method: HttpMethod.get, maxAttempts: 1);
-      return result.type == HttpResponseType.success;
+      final dio = Dio();
+      dio.options = BaseOptions(connectTimeout: timeout);
+      final result = await dio.get(testAddress);
+      return result.statusCode == 200;
     } catch (e) {
       return false;
     }
