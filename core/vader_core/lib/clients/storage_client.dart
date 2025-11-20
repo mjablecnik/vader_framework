@@ -36,7 +36,23 @@ class StorageClient {
   }
 
   Future<String?> getString(String key) {
-    return _storage.get(key);
+    try {
+      return Future.value(_storage.get(key));
+    } catch (e) {
+      return Future.value(null);
+    }
+  }
+
+  Future<void> saveList(String key, List value) {
+    return saveMap(key, {"data": value});
+  }
+
+  Future<dynamic> getList(String key) async {
+    try {
+      return (await getMap(key))["data"];
+    } catch (e) {
+      return Future.value(null);
+    }
   }
 
   Future<void> saveMap(String key, Map value) {
@@ -44,6 +60,10 @@ class StorageClient {
   }
 
   Future<dynamic> getMap(String key) async {
-    return json.decode((await _storage.get(key)).toString());
+    try {
+      return json.decode((await _storage.get(key)).toString());
+    } catch (e) {
+      return Future.value(null);
+    }
   }
 }
