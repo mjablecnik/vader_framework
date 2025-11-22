@@ -51,6 +51,9 @@ class ComponentBuilder {
       ' extends ThemeExtension<${name.pascalCase}Style> with _\$${name.pascalCase}StyleTailorMixin {',
     );
     code = code.replaceAll(classLine, replaceClassLine);
+    code =
+    "import 'package:$packageName/$packageName.dart';\n"
+        "${Utils.removeSrcExportsFromString(code, packageName: packageName)}";
 
     path = Directory(path.replaceFirst(inputPath, '')).parent.path;
 
