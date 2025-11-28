@@ -136,9 +136,9 @@ class HttpClient {
     return HttpResponse(data: result);
   }
 
-  Future<bool> hasInternetConnection({
+  Future<bool> _hasInternetConnection({
     String testAddress = 'https://www.google.com/',
-    Duration timeout = const Duration(seconds: 2),
+    Duration timeout = const Duration(seconds: 5),
   }) async {
     try {
       final dio = Dio();
@@ -150,7 +150,17 @@ class HttpClient {
     }
   }
 
-  Future<bool> _isConnectedToInternet([testAddress = 'google.com']) async {
+  Future<bool> checkInternetConnection(List<Uri> urls) async {
+    if (urls.isEmpty) return _hasInternetConnection();
+
+    final checks = urls.map((url) => _hasInternetConnection(testAddress: url.toString())).toList();
+    final results = await Future.wait(checks);
+
+    // Returns true if at least one of the urls is reachable.
+    return results.any((result) => result == true);
+  }
+
+  Future<bool> _isConnectedToInternet([String testAddress = 'google.com']) async {
     try {
       final result = await InternetAddress.lookup(testAddress);
       return result.isNotEmpty && result.first.rawAddress.isNotEmpty;
