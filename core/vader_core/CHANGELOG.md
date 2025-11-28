@@ -3,10 +3,22 @@
 All notable changes to this project will be documented in this file.
 
 
-## [Unreleased] - 2025-08-31
+## [0.6.0] - 2025-11-28
+### Added
+- Enhance internet connection checks in `HttpClient`.
+- Add method to check internet connection in `HttpClient`.
+- Add connect timeout configuration to `HttpClient`.
+  
+### Changed
+- Simplify `HttpClient` initialization and enhance timeout handling.
+- Improve HTTP client response handling.
+- Update HTTP client success status code handling.
+
 ### Fixed
 - HttpClient success status code handling.
-  
+- Enhance internet connection checks in `HttpClient` class.
+- Enhance `HttpResponse` with error handling and update request timeout.
+
 
 ## [0.5.0] - 2025-08-31
 ### Added
