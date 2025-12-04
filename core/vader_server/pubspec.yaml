@@ -9,9 +9,9 @@ environment:
 
 dependencies:
   uuid: ^4.5.1
-  #vader_core: any
-  vader_core:
-    path: ../vader_core
+  vader_core: 0.6.0
+  #vader_core:
+  #  path: ../vader_core
   mcp_server: ^1.0.2
   shelf_plus: ^1.10.1
   shelf_cors_headers: ^0.1.5
