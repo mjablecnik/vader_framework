@@ -2,7 +2,7 @@ name: vader_design
 description: Helper package for design packages
 repository: https://github.com/mjablecnik/vader_framework/tree/master/core/vader_design
 resolution: workspace
-version: 0.2.0
+version: 0.2.1
 
 environment:
   sdk: '>=3.7.0 <4.0.0'

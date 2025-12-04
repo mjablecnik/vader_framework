@@ -21,7 +21,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  vader_server: ^0.2.0
+  vader_server: ^0.2.1
 ```
 
 Then run:
