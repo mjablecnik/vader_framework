@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:hive_ce/hive.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:path_provider/path_provider.dart';
 
 class StorageClientMock extends Mock implements StorageClient {}
 
@@ -12,13 +10,8 @@ class StorageClient {
 
   const StorageClient(Box storage) : _storage = storage;
 
-  static Future<StorageClient> init({String name = 'defaultBox', String? path}) async {
-    if (path == null) {
-      Directory dir = await getApplicationDocumentsDirectory();
-      Hive.init(dir.path);
-    } else {
-      Hive.init(path);
-    }
+  static Future<StorageClient> init({String name = 'defaultBox', required String path}) async {
+    Hive.init(path);
     final storage = await Hive.openBox(name, path: path);
     return StorageClient(storage);
   }

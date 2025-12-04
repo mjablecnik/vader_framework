@@ -13,7 +13,6 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
   mek_data_class: ^1.4.0
-  path_provider: any
 
   # Repository:
   dio: ^5.8.0+1

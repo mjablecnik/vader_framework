@@ -133,10 +133,10 @@ packages:
     dependency: transitive
     description:
       name: freezed_annotation
-      sha256: c2e2d632dd9b8a2b7751117abcfc2b4888ecfe181bd9fca7170d9ef02e595fe2
+      sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "3.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -153,6 +153,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  hashlib:
+    dependency: transitive
+    description:
+      name: hashlib
+      sha256: "408af9bfb16289d433822635f0b6890e4440b74fe7acd40014983abeef6d33f0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  hashlib_codecs:
+    dependency: transitive
+    description:
+      name: hashlib_codecs
+      sha256: "0e1a17c47792fd131a9bf49b811c394b22516287746ee14cd0b0c22a34136699"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   hive_ce:
     dependency: transitive
     description:
@@ -313,6 +329,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  nanoid2:
+    dependency: transitive
+    description:
+      name: nanoid2
+      sha256: "35b5048f836652a1d711db0d716bdee59fcaaa4c37792db8b3568da4f7feb2f9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   node_preamble:
     dependency: transitive
     description:
@@ -501,26 +525,26 @@ packages:
     dependency: transitive
     description:
       name: talker
-      sha256: "5ab7d974ad92042b3e2382441c41ec4c6e5b3fa2b4b024d8ccbfc4bc2244b7bb"
+      sha256: "5ab800e29d91ce7728fa218c8a7d46f6c228202ac89af650c3f82cb938a64ba6"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.1.3"
   talker_dio_logger:
     dependency: transitive
     description:
       name: talker_dio_logger
-      sha256: "71780c52951d36e94964ca06158d827dfc67aa2fb75c8b880603cfefa4377b39"
+      sha256: "214a31d2ecc488ae6abf623ca9dac3831d34e66195f633bd1909a9d0c282ab8c"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.1.3"
   talker_logger:
     dependency: transitive
     description:
       name: talker_logger
-      sha256: "16ff0cfdf011f65b37957c9ff7ef7043dd9f1c8af3ccb4a44ac4a448defb9eb5"
+      sha256: bc75612ace4dbb82fbad36181ff27e95b1ee152c719c2fea6b8ac59c4f091cd2
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.14"
+    version: "5.1.3"
   term_glyph:
     dependency: transitive
     description:
@@ -561,6 +585,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  ulid:
+    dependency: transitive
+    description:
+      name: ulid
+      sha256: "6d1f44802679bc3e3cc824045546af2bf26b1d8d0551f45457fedb6c827409ba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   uuid:
     dependency: "direct main"
     description:
@@ -572,18 +604,17 @@ packages:
   vader_core:
     dependency: "direct main"
     description:
-      name: vader_core
-      sha256: "85db7b49c29b6e55dcdeda6044fb62ec271e7a358c2ec623a50273dc32bec9e8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.2"
+      path: "../../vader_core"
+      relative: true
+    source: path
+    version: "0.6.0"
   vader_server:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.2.0"
+    version: "0.2.1"
   vm_service:
     dependency: transitive
     description:
@@ -604,10 +635,10 @@ packages:
     dependency: transitive
     description:
       name: web
-      sha256: d43c1d6b787bf0afad444700ae7f4db8827f701bc61c255ac8d328c6f4d52062
+      sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.1"
   web_socket:
     dependency: transitive
     description:
