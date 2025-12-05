@@ -16,14 +16,12 @@ class VaderServer {
     required this.modules,
     this.config = const VaderServerConfig(),
     this.mcpConfig = const VaderMcpConfig(),
-    this.setupDelay = const Duration(seconds: 1),
   });
 
   final List<VaderModule> modules;
 
   final VaderServerConfig config;
   final VaderMcpConfig mcpConfig;
-  final Duration setupDelay;
 
   Middleware? _getCombinedMiddleware(List<Middleware> middlewares) {
     if (middlewares.isEmpty) return null;
@@ -58,9 +56,8 @@ class VaderServer {
   _setupInjector() async {
     for (VaderModule module in modules) {
       final services = module.services;
-      services.call(injector);
+      await services.call(injector);
     }
-    await Future.delayed(setupDelay);
     injector.commit();
   }
 
