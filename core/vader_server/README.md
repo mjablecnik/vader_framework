@@ -40,16 +40,11 @@ Modules are the building blocks of your application. They contain controllers, m
 import 'package:vader_server/vader_server.dart';
 
 class AppModule extends VaderModule {
-  Injector? _injector;
-
+  
   @override
-  Injector? get services {
-    if (_injector != null) return _injector;
-
-    _injector = Injector();
-    _injector!.addSingleton(MyService.new);
-    
-    return _injector!;
+  Future<Injector> services(Injector i) async {
+    i.addSingleton(MyService.new);
+    return i;
   }
 
   @override
