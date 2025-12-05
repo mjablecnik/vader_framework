@@ -1,4 +1,0 @@
-bricks:
-  hello: ^0.1.0+2
-  vader_component:
-    path: bricks/vader_component

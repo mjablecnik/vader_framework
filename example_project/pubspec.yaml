@@ -1,5 +1,0 @@
-name: example_project
-publish_to: none
-environment:
-  sdk: ^3.7.0
-#workspace:

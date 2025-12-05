@@ -14,5 +14,3 @@ workspace:
   - core/vader_core
   - core/vader_design
   - core/vader_server
-  #- example_design
-  #- example_project

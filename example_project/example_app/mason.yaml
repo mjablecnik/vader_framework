@@ -1,5 +1,0 @@
-bricks:
-  vader_feature:
-    path: bricks/vader_feature
-  vader_entity:
-    path: bricks/vader_entity

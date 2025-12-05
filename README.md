@@ -9,14 +9,11 @@ Vader Framework is designed to accelerate and standardize the development of Flu
 
 - **Core libraries** for application logic, design systems, and CLI utilities.
 - **Code generation tools** to automate repetitive tasks and scaffold new components or design structures.
-- **Example projects** demonstrating best practices for frontend (Flutter) and backend (multiple technologies) integration.
 
 ## Key Features
 
 - **Modular Architecture:** Includes core packages for app logic (`vader_core`, `vader_app`), design systems (`vader_design`), and CLI utilities (`vader_console`).
 - **Code & Design Generators:** CLI tools (`code_builder`, `design_builder`) to automate code and design structure generation.
-- **Example Implementations:** Ready-to-use example apps and design systems to help you get started quickly.
-- **Backend Integration:** Sample backend services in various technologies (Node.js, Python, Dart, etc.) for full-stack development.
 
 ## Who is it for?
 
@@ -28,7 +25,10 @@ Vader Framework is designed to accelerate and standardize the development of Flu
 
 - `core/` – Core libraries for app logic, design, and CLI utilities.
 - `cli/` – Code and design generators for automating development tasks.
-- `example_project/` – Example apps, design systems, and backend integrations.
+
+## Example Project
+
+You can see an example project using Vader Framework here: https://github.com/mjablecnik/vader_project
 
 ## Author
 

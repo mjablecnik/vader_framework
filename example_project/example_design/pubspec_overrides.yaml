@@ -1,3 +1,0 @@
-dependency_overrides:
-  vader_design:
-    path: ../../core/vader_design
