@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.2]
+- Update README.md 
+  
+
+## [0.3.1]
+- Resolve dependencies
+
 
 ## [0.3.0]
 - Refactor injector

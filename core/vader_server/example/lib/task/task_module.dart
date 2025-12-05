@@ -1,10 +1,8 @@
 import 'package:vader_server/vader_server.dart';
-import 'package:vader_server_example/core/app_module.dart';
 import 'package:vader_server_example/task/task_controller.dart';
 import 'package:vader_server_example/task/task_service.dart';
 import 'package:vader_server_example/task/todoist_repository.dart';
 
-import '../clients/surrealdb_client.dart' hide Middleware;
 
 class TaskModule extends VaderModule {
   @override
