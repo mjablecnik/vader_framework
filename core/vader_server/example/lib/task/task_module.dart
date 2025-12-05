@@ -6,21 +6,17 @@ import 'package:vader_server_example/task/todoist_repository.dart';
 
 import '../clients/surrealdb_client.dart' hide Middleware;
 
-class TaskModule extends AppModule {
+class TaskModule extends VaderModule {
   @override
-  Injector? get services {
-    final services = super.services!;
-    services.waitFor<SurrealDB>(() {
-      services.addSingleton(TodoistRepository.new);
-      services.addSingleton(TaskService.new);
-    });
-    return services;
+  Future<Injector> services(Injector i) async {
+    i.addSingleton(TodoistRepository.new);
+    i.addSingleton(TaskService.new);
+    return i;
   }
 
   @override
   List<Controller> get controllers => [TaskController()];
 
   @override
-  List<Middleware> get middlewares => [...super.middlewares];
+  List<Middleware> get middlewares => [logRequests()];
 }
-

@@ -16,12 +16,14 @@ class VaderServer {
     required this.modules,
     this.config = const VaderServerConfig(),
     this.mcpConfig = const VaderMcpConfig(),
+    this.setupDelay = const Duration(seconds: 1),
   });
 
   final List<VaderModule> modules;
 
   final VaderServerConfig config;
   final VaderMcpConfig mcpConfig;
+  final Duration setupDelay;
 
   Middleware? _getCombinedMiddleware(List<Middleware> middlewares) {
     if (middlewares.isEmpty) return null;
@@ -56,10 +58,10 @@ class VaderServer {
   _setupInjector() async {
     for (VaderModule module in modules) {
       final services = module.services;
-      injector.addInjector(services ?? Injector());
+      services.call(injector);
     }
+    await Future.delayed(setupDelay);
     injector.commit();
-    await Future.delayed(Duration(seconds: 1));
   }
 
   run() async {
@@ -151,7 +153,7 @@ abstract class VaderModule {
 
   abstract final List<Controller> controllers;
   abstract final List<Middleware> middlewares;
-  abstract final Injector? services;
+  Future<Injector> services(Injector i);
 }
 
 typedef ReqResHandler = Future Function(HandlerContext context);
