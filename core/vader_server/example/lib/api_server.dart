@@ -1,5 +1,4 @@
 import 'package:vader_server/vader_server.dart';
-import 'package:vader_server_example/clients/ai_client.dart';
 import 'package:vader_server_example/core/app_module.dart';
 import 'package:vader_server_example/task/task_module.dart';
 
