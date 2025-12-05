@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 <!-- ## [Unreleased] - 2025-02-26 -->
 
+## [Unreleased] - 2025-12-05
+- Add some useful packages (app_settings, path_provider, permission_handler, url_launcher, flutter_svg)
+ 
+
 ## [0.4.0] - 2025-08-31
 ### Breaking Change
 - Remove custom routes

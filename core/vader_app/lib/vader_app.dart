@@ -9,6 +9,12 @@ import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 export 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 
+export 'package:app_settings/app_settings.dart';
+export 'package:path_provider/path_provider.dart';
+export 'package:permission_handler/permission_handler.dart';
+export 'package:url_launcher/url_launcher.dart';
+export 'package:flutter_svg/flutter_svg.dart';
+
 export 'back_button_handler.dart';
 export 'settings_provider.dart';
 export 'splash_view.dart';

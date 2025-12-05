@@ -22,6 +22,12 @@ dependencies:
   talker_flutter: ^5.0.0
   back_button_interceptor: ^8.0.4
 
+  app_settings: ^6.1.1
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  url_launcher: ^6.3.2
+  flutter_svg: ^2.2.1
+
   # State Manager:
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
@@ -33,12 +39,9 @@ dependencies:
 
   # App Info:
   package_info_plus: ^8.3.1
+  device_info_plus: ^11.5.0
   mobile_device_identifier: ^0.0.3
 
-  # Connection:
-  #flutter_offline: 3.0.1
-  #simple_connection_checker: ^0.3.4
-  #internet_connection_checker: 3.0.1
 
 dev_dependencies:
   lints: ^6.0.0
