@@ -5,15 +5,19 @@ export 'package:surrealdb/surrealdb.dart';
 
 class SurrealDbClient {
   static Future<SurrealDB> init({SurrealDbConfig config = const SurrealDbConfig()}) async {
-    final db = SurrealDB(config.address);
-    db.connect();
-    await db.wait();
+    try {
+      final db = SurrealDB(config.address);
+      db.connect();
+      await db.wait();
 
-    final token = await db.signin(user: config.user, pass: config.password);
-    await db.authenticate(token);
+      final token = await db.signin(user: config.user, pass: config.password);
+      await db.authenticate(token);
 
-    await db.use(config.namespace, config.database);
-    return db;
+      await db.use(config.namespace, config.database);
+      return db;
+    } catch (e) {
+      throw Exception('Failed to connect to SurrealDB at ${config.address}: $e');
+    }
   }
 
   static Future<SurrealDB> initDancee() async {
