@@ -351,7 +351,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-dev.2"
+    version: "1.0.0"
   vm_service:
     dependency: transitive
     description:
