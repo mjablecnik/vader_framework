@@ -21,6 +21,10 @@ Vader Framework is designed to accelerate and standardize the development of Flu
 - Teams aiming to standardize and speed up their development workflow.
 - Anyone looking for a comprehensive, extensible framework for building modern, cross-platform apps.
 
+## Installation
+1) dart pub global activate melos
+2) melos bootstrap
+
 ## Project Structure
 
 - `core/` – Core libraries for app logic, design, and CLI utilities.
